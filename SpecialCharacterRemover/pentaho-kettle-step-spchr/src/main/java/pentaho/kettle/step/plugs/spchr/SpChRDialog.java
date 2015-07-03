@@ -53,7 +53,7 @@ public class SpChRDialog extends BaseStepDialog implements StepDialogInterface{
 	private Map<String, String> prevFieldIndexMap;
 	private Combo wAlgoBox;
 	private Text wCustomLabel;
-	
+	//private Color customCodeColor;
 
 	public SpChRDialog(Shell parent, Object in, TransMeta transMeta, String sname) {
 		super(parent, (BaseStepMeta) in, transMeta, sname);
@@ -293,17 +293,22 @@ public class SpChRDialog extends BaseStepDialog implements StepDialogInterface{
 					case 1:
 						if(textLen >=1 && textEnter.substring(0,1).equals("[") && textEnter.substring(textLen-1, textLen).equals("]")){
 							wCustomLabel.setBackground(GREEN);
+							//setCustomCodeColor(GREEN); //for future ref.
 						}else{ 
 							//initial conditions are false
 							wCustomLabel.setBackground(RED);
+							//setCustomCodeColor(RED);
 						}				
 						break;
 					case 2:
 							try {
 								Pattern.compile(textEnter);
 								wCustomLabel.setBackground(GREEN);
+								//setCustomCodeColor(GREEN);
+								
 							} catch (Exception e) {
 								wCustomLabel.setBackground(RED);
+								//setCustomCodeColor(RED);
 							}
 
 							break;
@@ -349,52 +354,93 @@ public class SpChRDialog extends BaseStepDialog implements StepDialogInterface{
 		return stepname;
 	}
 
+	
+
 	//asynchronously loading the ComboBox. call setComboBox
 	private void setComboBox() {
-		// TODO Auto-generated method stub
-		Runnable fieldLoader=new Runnable() {
-			public void run() {
-				// TODO Auto-generated method stub
-				try {
-					prevFields=transMeta.getPrevStepFields(stepname);
-				} catch (KettleStepException e) {
-					// TODO Auto-generated catch block
-					prevFields=new RowMeta();
-					logError("Unable to Find Input Fields");
-				}
-				
-				prevFieldIndexMap=new HashMap<String, String>();
-				
-				String[] prevStepFieldsNames=prevFields.getFieldNames();
-				
-				for(int i=0;i<prevStepFieldsNames.length; i++){
-			
-					prevFieldIndexMap.put(prevStepFieldsNames[i],Integer.toString(i));				
-				}
+			// TODO Auto-generated method stub
+			Runnable fieldLoader=new Runnable() {
+				public void run() {
+					// TODO Auto-generated method stub
+					try {
+						prevFields=transMeta.getPrevStepFields(stepname);
+					} catch (KettleStepException e) {
 						
-				wInputDrop.setItems(prevStepFieldsNames);
-				//wInputDrop.addSelectionListener(lsDef);
-			}
-		};
-		new Thread(fieldLoader).run();
-		
-	}
-
+						prevFields=new RowMeta();
+						logError("Unable to Find Input Fields");
+					}
+					
+					prevFieldIndexMap=new HashMap<String, String>();
+					
+					String[] prevStepFieldsNames=prevFields.getFieldNames();
+					
+					for(int i=0;i<prevStepFieldsNames.length; i++){
+				
+						prevFieldIndexMap.put(prevStepFieldsNames[i],Integer.toString(i));				
+					}
+							
+					wInputDrop.setItems(prevStepFieldsNames);
+					
+					if(meta.getInputDropDataIndex()!=null){ //checking for the previously selected entry
+						int int_index=Integer.parseInt(meta.getInputDropDataIndex());
+						wInputDrop.select(int_index);
+					}
+				}
+			};
+			new Thread(fieldLoader).run();
+			
+		}
+	
+	
+	
+	/**
+	 * populateDialog method is called when we open or re-open the dialog. 
+	 * Also displays the last selections done by the user.
+	 * 
+	 */
 	private void populateDialog() {
 		wStepname.selectAll();
+		int algoindex=0;
 		
 		if(meta.getOutputField()!=null){
 			wFieldName.setText(meta.getOutputField());
 		}
 				
-		if(meta.getAlgoBoxItems()!=null){
-			wAlgoBox.setItems(meta.getAlgoBoxItems());		
-			//wAlgoBox.select(0); //always by default selects the first item.
+		wAlgoBox.setItems(meta.getAlgoBoxItems());
+				
+		if(meta.getAlgoBoxItemsSelected()!=null){
+			
+			
+			if(meta.getAlgoBoxItemsSelected().equals("Remove all the Special Characters other than A-Z,a-z,0-9 including white-spaces")) {
+				algoindex=0;
+			}else if(meta.getAlgoBoxItemsSelected().equals("Remove all the Special Characters other than A-Z,a-z,0-9 keep the white-spaces")){
+				algoindex=1;
+			}else if(meta.getAlgoBoxItemsSelected().equals("Remove anything outside ASCII code 0 to 255")){
+				algoindex=2;
+			}else if(meta.getAlgoBoxItemsSelected().equals("Remove Unicode Block")){
+				algoindex=3;
+			}else if(meta.getAlgoBoxItemsSelected().equals("Keep Unicode Block, remove the rest")){
+				algoindex=4;
+			}else if(meta.getAlgoBoxItemsSelected().equals("Keep A-Z,a-z,0-9 and ADD Exceptions")){
+				algoindex=5;
+			}else{
+				algoindex=6;
+			}
+			
+			wAlgoBox.select(algoindex);
 		}
 		
+		
+		if(meta.getCustomCode()!=null && (algoindex==5 || algoindex==6)){
+			wCustomLabel.setText(meta.getCustomCode());
+			wCustomLabel.setEditable(true);
+			wCustomLabel.setBackground(null);
+			//customLabel.setForeground(null);
+		}
 				
 	}
 
+	
 	/**
 	 * Called when the user cancels the dialog.
 	 */
@@ -424,6 +470,7 @@ public class SpChRDialog extends BaseStepDialog implements StepDialogInterface{
 		meta.setInputDropDataIndex(prevFieldIndexMap.get(wInputDrop.getText()));
 		meta.setAlgoBoxItemsSelected(wAlgoBox.getText());
 		meta.setCustomCode(wCustomLabel.getText());
+		//meta.setCustomCodeBackgrndColor(getCustomCodeColor().toString());
 	
 		// close the SWT dialog window
 		dispose();
@@ -445,6 +492,7 @@ public class SpChRDialog extends BaseStepDialog implements StepDialogInterface{
 		this.prevFieldIndexMap = prevFieldIndexMap;
 	}
 
+	
 	
 
 }

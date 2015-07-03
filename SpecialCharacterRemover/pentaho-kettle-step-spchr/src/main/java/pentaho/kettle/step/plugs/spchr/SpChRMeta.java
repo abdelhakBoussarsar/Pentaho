@@ -37,11 +37,8 @@ import org.w3c.dom.Node;
  * 
  */
 public class SpChRMeta extends BaseStepMeta implements StepMetaInterface{
-	/**
-	 *	The PKG member is used when looking up internationalized strings.
-	 *	The properties file with localized keys is expected to reside in 
-	 *	{the package of the class specified}/messages/messages_{locale}.properties   
-	 */
+	
+	
 	private static Class<?> PKG = SpChRMeta.class;
 	
 	private String outputField; //the new column or field name
@@ -57,6 +54,7 @@ public class SpChRMeta extends BaseStepMeta implements StepMetaInterface{
 	};
 	private String algoBoxItemsSelected;
 	private String customCode;
+	//private String customCodeBackgrndColor; //for future ref.
 
 	public SpChRMeta() {
 		// TODO Auto-generated constructor stub
@@ -81,7 +79,8 @@ public class SpChRMeta extends BaseStepMeta implements StepMetaInterface{
 
 	public void setDefault() {
 		// default output field name
-		outputField = "Result"; 		
+		outputField = "Result";
+		algoBoxItemsSelected="Remove all the Special Characters other than A-Z,a-z,0-9 including white-spaces";
 	}
 
 	public String getOutputField() {
@@ -114,11 +113,15 @@ public class SpChRMeta extends BaseStepMeta implements StepMetaInterface{
 		// only one field to serialize
 		StringBuilder xml=new StringBuilder();
 		
-		xml.append("      ").append(XMLHandler.addTagValue("outputfield", outputField));
+		xml.append("<fielddata>").append(XMLHandler.addTagValue("outputfield", outputField));
 		xml.append("      ").append(XMLHandler.addTagValue("inputDropData",inputDropData));
+		xml.append("      ").append(XMLHandler.addTagValue("inputDropDataIndex",inputDropDataIndex));
 		xml.append("      ").append(XMLHandler.addTagValue("algoBoxItemsSelected",algoBoxItemsSelected ));
 		xml.append("      ").append(XMLHandler.addTagValue("customCode", customCode));
-				
+		//xml.append("      ").append(XMLHandler.addTagValue("customCodeBackgrndColor", customCodeBackgrndColor));
+		xml.append("</fielddata>");
+		
+		
 		return xml.toString();
 	}
 
@@ -130,8 +133,10 @@ public class SpChRMeta extends BaseStepMeta implements StepMetaInterface{
 			setOutputField(XMLHandler.getNodeValue(XMLHandler.getSubNode(
 					stepnode, "outputfield")));
 			setInputDropData(XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "inputDropData")));
+			setInputDropDataIndex(XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "inputDropDataIndex")));
 			setAlgoBoxItemsSelected(XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "algoBoxItemsSelected")));
 			setCustomCode(XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "customCode")));
+			//setCustomCodeBackgrndColor(XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "customCodeBackgrndColor")));
 			
 		} catch (Exception e) {
 			throw new KettleXMLException(
@@ -144,11 +149,12 @@ public class SpChRMeta extends BaseStepMeta implements StepMetaInterface{
 	public void saveRep(Repository rep, ObjectId id_transformation,
 			ObjectId id_step) throws KettleException {
 		try {
-			rep.saveStepAttribute(id_transformation, id_step,
-					"outputfield", outputField); //$NON-NLS-1$			
+			rep.saveStepAttribute(id_transformation, id_step, "outputfield", outputField); //$NON-NLS-1$			
 			rep.saveStepAttribute(id_transformation, id_step, "inputDropData", inputDropData);
+			rep.saveStepAttribute(id_transformation, id_step, "inputDropDataIndex", inputDropDataIndex);
 			rep.saveStepAttribute(id_transformation, id_step, "algoBoxItemsSelected", algoBoxItemsSelected);
 			rep.saveStepAttribute(id_transformation, id_step, "customCode", customCode);
+			//rep.saveStepAttribute(id_transformation, id_step, "customCodeBackgrndColor", customCodeBackgrndColor);
 			
 		} catch (Exception e) {
 			throw new KettleException("Unable to save step into repository: "
@@ -163,8 +169,10 @@ public class SpChRMeta extends BaseStepMeta implements StepMetaInterface{
 		try {
 			outputField = rep.getStepAttributeString(id_step, "outputfield"); //$NON-NLS-1$
 			inputDropData=rep.getStepAttributeString(id_step, "inputDropData");
+			inputDropDataIndex=rep.getStepAttributeString(id_step, "inputDropDataIndex");
 			algoBoxItemsSelected=rep.getStepAttributeString(id_step, "algoBoxItemsSelected");
 			customCode=rep.getStepAttributeString(id_step, "customCode");
+			//customCodeBackgrndColor=rep.getStepAttributeString(id_step, "customCodeBackgrndColor");
 			
 		} catch (Exception e) {
 			throw new KettleException("Unable to load step from repository", e);
@@ -258,6 +266,5 @@ public class SpChRMeta extends BaseStepMeta implements StepMetaInterface{
 	}
 
 	
-
 
 }

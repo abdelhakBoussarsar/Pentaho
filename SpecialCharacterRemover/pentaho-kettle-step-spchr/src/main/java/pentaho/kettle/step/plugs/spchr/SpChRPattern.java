@@ -17,8 +17,13 @@ public class SpChRPattern {
 	public String getCleanPattern(RowMetaInterface data,Object[] r,String fieldNum,String selectedPattern,String customCode) throws KettleValueException{
 	
 		String replace_pattern="";
+		int _intfieldNum=0;
 		
-		int _intfieldNum=Integer.parseInt(fieldNum);
+		if(fieldNum==null){
+			_intfieldNum=0;
+		}else{
+			_intfieldNum=Integer.parseInt(fieldNum);
+		}
 		
 		String data_row=data.getString(r, _intfieldNum);
 		
