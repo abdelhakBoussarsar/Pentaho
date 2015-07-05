@@ -7,11 +7,11 @@
 - **Email**: rishu.shrivastava@gmail.com
 
 ## Support Details:
+> **CURRENT STABLE VERSION SUPPORTED**: Special Character Remover ver 1.1.0
 
-- CURRENT STABLE VERSION SUPPORTED : Special Character Remover ver 1.1.0
-- Minimum Kettle Support Version: PDI ver 4.8
-- Minimum Kettle Support Version: PDI ver 5.x.x
-- For Issue in Plugin : Mail to rishu.shrivastava@gmail.com
+- **Minimum Kettle Support Version**: PDI ver 4.8
+- **Minimum Kettle Support Version**: PDI ver 5.x.x
+- **For Issue in Plugin**: Mail to rishu.shrivastava@gmail.com
 
 ## Description:
 
@@ -31,6 +31,7 @@ Click on the link below to download.
 
 ## Licence:
 Plugin is Built under the Apache License 2.0
+
 For more details see: http://www.apache.org/licenses/LICENSE-2.0.html
 
 
