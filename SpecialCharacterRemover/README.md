@@ -1,26 +1,43 @@
-Special Character Remover | Kettle Step Plugin
-=======
-
-Details:
---
-
-Kettle Version : 5.0.0.1 GA
-
-OS             : 64 bit Win 8
-
-Tools used     : Eclipse (Luna)
-
-Plugin Description:
---
-
-SpChR / Special Character Remover was build with a purpose to remove any special characters occuring in the input stream. It ignores any characters (as a part of the release 1) other than A-Z/a-z/0-9.
-
-Version 1 updates:
---
-1. It takes only one the first stream of the input as the column to remove the special characters.
-2. It doesnt provide users to customize on what all characters needs to be parsed or ignored.
+# Special Character Remover 
+> A Pentaho Kettle Plugin to clean your input stream off special character
 
 
-Future release:
---
-Trying to resolve all the points in the version 1 release.
+- **Plugin version**: 1.1.0
+- **Author**: Rishu Shrivastava
+- **Email**: rishu.shrivastava@gmail.com
+
+## Support Details:
+
+- CURRENT STABLE VERSION SUPPORTED : Special Character Remover ver 1.1.0
+- Minimum Kettle Support Version: PDI ver 4.8
+- Minimum Kettle Support Version: PDI ver 5.x.x
+- For Issue in Plugin : Mail to rishu.shrivastava@gmail.com
+
+## Description:
+
+**Special Character Remover** is a Pentaho DI Step Plugin which aims at cleaning your input data off the Special Characters or junk values.
+Use pre-defined algorithms in the Step to remove special characters. Users can also use his/her custom regular expression codes to 
+work with the input stream.
+
+A detailed explaination has been provided in the wordpress blog post as below:
+
+[Link to wordpress Blog](https://anotherreeshu.wordpress.com/2015/01/07/special-character-remover-clean-your-data-of-special-characters-pentaho-kettle-step-plugin/)
+
+## Download:
+
+Click on the link below to download. 
+
+[Download Plugin in .zip format](https://github.com/rishuatgithub/Pentaho/blob/master/SpecialCharacterRemover/marketplace/SpecialCharacterRemover-ver-1.1.0.zip)
+
+## Licence:
+Plugin is Built under the Apache License 2.0
+For more details see: http://www.apache.org/licenses/LICENSE-2.0.html
+
+
+
+
+
+
+
+
+
