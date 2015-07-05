@@ -83,27 +83,11 @@ public class SpChRMeta extends BaseStepMeta implements StepMetaInterface{
 		algoBoxItemsSelected="Remove all the Special Characters other than A-Z,a-z,0-9 including white-spaces";
 	}
 
-	public String getOutputField() {
-		return outputField;
-	}
-
-	public void setOutputField(String outputField) {
-		this.outputField = outputField;
-	}
-
-	public String getInputDropData() {
 		
-		return inputDropData;
-	}
-
-	public void setInputDropData(String inputDropData) {
-		this.inputDropData = inputDropData;
-	}
-
-	
 	@Override
 	public Object clone() {
-		Object retval = super.clone();
+		//Object retval = super.clone();
+		SpChRMeta retval= (SpChRMeta) super.clone();
 		return retval;
 	}
 
@@ -113,15 +97,13 @@ public class SpChRMeta extends BaseStepMeta implements StepMetaInterface{
 		// only one field to serialize
 		StringBuilder xml=new StringBuilder();
 		
-		xml.append("<fielddata>").append(XMLHandler.addTagValue("outputfield", outputField));
+		xml.append("      ").append(XMLHandler.addTagValue("outputfield", outputField));
 		xml.append("      ").append(XMLHandler.addTagValue("inputDropData",inputDropData));
 		xml.append("      ").append(XMLHandler.addTagValue("inputDropDataIndex",inputDropDataIndex));
 		xml.append("      ").append(XMLHandler.addTagValue("algoBoxItemsSelected",algoBoxItemsSelected ));
 		xml.append("      ").append(XMLHandler.addTagValue("customCode", customCode));
 		//xml.append("      ").append(XMLHandler.addTagValue("customCodeBackgrndColor", customCodeBackgrndColor));
-		xml.append("</fielddata>");
-		
-		
+				
 		return xml.toString();
 	}
 
@@ -197,6 +179,7 @@ public class SpChRMeta extends BaseStepMeta implements StepMetaInterface{
 		
 		// type is going to be string
 		v.setType(ValueMetaInterface.TYPE_STRING);
+		
 
 		// setting trim type to "both"
 		v.setTrimType(ValueMetaInterface.TRIM_TYPE_BOTH);
@@ -231,6 +214,22 @@ public class SpChRMeta extends BaseStepMeta implements StepMetaInterface{
 
 	}
 
+	public String getOutputField() {
+		return outputField;
+	}
+
+	public void setOutputField(String outputField) {
+		this.outputField = outputField;
+	}
+
+	public String getInputDropData() {
+		
+		return inputDropData;
+	}
+
+	public void setInputDropData(String inputDropData) {
+		this.inputDropData = inputDropData;
+	}
 	
 	public String getInputDropDataIndex() {
 		return inputDropDataIndex;
