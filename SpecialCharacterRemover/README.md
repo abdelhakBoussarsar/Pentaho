@@ -27,7 +27,7 @@ A detailed explaination has been provided in the wordpress blog post as below:
 
 Click on the link below to download. 
 
-[Download Plugin in .zip format](https://github.com/rishuatgithub/Pentaho/blob/master/SpecialCharacterRemover/marketplace/SpecialCharacterRemover-ver-1.1.0.zip)
+[Download Plugin in .zip format](https://github.com/rishuatgithub/Special-Character-Remover/releases/download/SpecialCharacterRemover_v1.1.0/SpecialCharacterRemover-ver-1.1.0.zip)
 
 ## Licence:
 Plugin is Built under the Apache License 2.0
