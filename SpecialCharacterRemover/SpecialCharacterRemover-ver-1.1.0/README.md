@@ -27,9 +27,9 @@ Follow the [link](https://anotherreeshu.wordpress.com/2015/01/13/special-charact
 
 ## Installing the plugin:
 
-1. Download the Zip file from the `Marketplace` Github folder:
+1. Download the Zip file from the Github directory:
 
-  [Click Here to download](https://github.com/rishuatgithub/Pentaho/blob/master/SpecialCharacterRemover/marketplace/SpecialCharacterRemover-ver-1.1.0.zip)
+  [Click Here to download](https://github.com/rishuatgithub/Special-Character-Remover/releases/download/SpecialCharacterRemover_v1.1.0/SpecialCharacterRemover-ver-1.1.0.zip)
   
 2. Simply copy the contents of the folder into : 
 
