@@ -18,6 +18,7 @@ public class KettleJavaClass {
 			KettleEnvironment.init();
 			TransMeta metadata=new TransMeta(file);
 			Trans trans=new Trans(metadata);
+			
 			trans.execute(null);
 			trans.waitUntilFinished();
 			
